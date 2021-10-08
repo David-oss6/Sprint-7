@@ -23,7 +23,7 @@
 .btn {
     margin: 0 15px; 
     background-color: rgb(171, 171, 248);
-       text-decoration: none;
+    text-decoration: none;
     border: 2px black solid;
 }
 .btn-ico{
@@ -32,6 +32,16 @@
     border: none;
 }
 
+/* ///////////   Cliente style ///////////////////*/
+.myPrimerLi{
+  font-size: 25px;
+  text-decoration: underline;
+}
+.myLi{
+  font-size: 20px;
+  text-decoration: none;
+  margin-left: 15px;
+}
 
 /* ///////////  MODAL   ////////////////////////// */
 .modalContainer {

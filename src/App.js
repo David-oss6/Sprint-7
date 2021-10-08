@@ -23,7 +23,7 @@ function App() {
   const [webExtras, setWebExtras] = useState(0)
   const [modalP, setModalP] = useState(false)
   const [modalL, setModalL] = useState(false)
-  const clientes = []
+
 
   const seleccion = (num) => {
     if (num === 1) {
@@ -143,23 +143,28 @@ function App() {
 
 
   ////////    LISTA CLIENTES ////////////////////////
-  const presu = useRef(null)
-  const perso = useRef(null)
+  const [clientes, setClientes] = useState([]);
   const [presupuesto, setPresupuesto] = useState("")
   const [persona, setPresona] = useState("")
 
   const generarClientes = () => {
-    setPresupuesto(presu.current.innerHTML)
-    setPresona(perso.current.value)
-    console.log(presupuesto)
+    var day = Math.floor(Math.random() * 31)
+    var month = Math.floor(Math.random() * 12)
+    var fecha = new Date(2021, day, month)
+    fecha = fecha.toISOString()
+    console.log(fecha)
     const newCliente = {
       nomPresupost: presupuesto,
       nomClient: persona,
-      data: "Hoy",
+      data: fecha,
       preu: price
     }
-    clientes.push(newCliente)
-    console.log(clientes)
+    setClientes([...clientes, newCliente])
+    setPresupuesto("")
+    setPresona("")
+    setIsAds(false)
+    setIsSeo(false)
+    setIsWeb(false)
   }
 
 
@@ -229,12 +234,19 @@ function App() {
             <br />
             <p>Preu: {price}</p>
             <hr />
+
             {/* ///////////  INICIO CLIENTEES ///////////////////// */}
 
-            <button onClick={() => generarClientes()} >Guardar Presupuesto</button>
+            <button class="btn bg-warning" onClick={() => generarClientes()} >Guardar Presupuesto</button>
             <div>
-              <input type="text" href={presu} placeholder="Nom de presupost" />
-              <input type="text" href={perso} placeholder="Nom del client" />
+              <input type="text"
+                value={presupuesto}
+                onInput={event => setPresupuesto(event.target.value)}
+                placeholder="Nom de presupost" />
+              <input type="text"
+                value={persona}
+                onInput={event => setPresona(event.target.value)}
+                placeholder="Nom del client" />
             </div>
 
             <Cliente listaClientes={clientes} />
