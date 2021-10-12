@@ -142,8 +142,6 @@ function App() {
     JSON.stringify(price)
     localStorage.setItem("valor", "price")
   }, [price])
-
-
   ////////    LISTA CLIENTES ////////////////////////
   const [clientes, setClientes] = useState([]);
   const [presupuesto, setPresupuesto] = useState("")
@@ -190,88 +188,97 @@ function App() {
 
 
       <Switch>
+
         <Route path={`/compra/`} component={Usuario} >
-          <div >
-            <div className="div">
-              <input className="box" onClick={() => seleccion(1)} type="checkbox"
-                checked={isWeb}
-              ></input>
-              <p className="box">Pagina Web (500€)</p>
-            </div>
 
-            {/* /* /////////-----------WEB-----------////////////*/}
-            {isWeb ? <MyWeb >
-              {loadData()}
-              {modalP && <Modalpaginas cerrarModal={setModalP} />}
-              {modalL && <Modalidioma cerrarModal={setModalL} />}
-              <p className="box webdiv">Numero de páginas</p>
-              <MyBtn onClick={() => restaP()} >-</MyBtn>
-              <MyInput className="box webdiv"
-                onChange={(event) => definirPagina(event.target.value)}
-                type="number"
-                value={valorP}
-                href={pagina}
-              />
-              <MyBtn onClick={() => sumarP()} >+</MyBtn>
-              <button onClick={() => { setModalP(true) }} className="btn-ico" >
-                <i title="Info Paginas" class="far fa-question-circle"></i>
-              </button>
-              <br />
-              <p className="box webdiv">Numero de idiomas</p>
-              <MyBtn onClick={() => restaI()} >-</MyBtn>
-              <MyInput className="box webdiv"
-                onChange={(event) => definirIdioma(event.target.value)}
-                type="number"
-                value={valorI}
-                href={idioma} />
-              <MyBtn onClick={() => sumarI()}>+</MyBtn>
-              <button onClick={() => { setModalL(true) }} className="btn-ico">
-                <i title="Info Idiomas" class="far fa-question-circle"></i>
-              </button>
-            </MyWeb> : null}
-            {/* /* /////////-----------FIN  WEB-----------////////////*/}
-            <br />
-            <div className="div">
-              <input className="box" onClick={() => seleccion(2)} type="checkbox"
-                checked={isSeo}  ></input>
-              <p className="box">Consultoria SEO (300€)</p>
-            </div>
-            <br />
-            <div className="div">
-              <input className="box" onClick={() => seleccion(3)} type="checkbox"
-                checked={isAds}  ></input>
-              <p className="box">Google Ads (200€)</p>
-            </div>
-            <br />
-            <p>Preu: {price}</p>
-            <hr />
-
-            {/* ///////////  INICIO CLIENTEES ///////////////////// */}
-
-            <button class="btn bg-warning" onClick={() => generarClientes()} >Guardar Presupuesto</button>
+          <div className="d-flex"  >
             <div>
-              <input type="text"
-                value={presupuesto}
-                onInput={event => setPresupuesto(event.target.value)}
-                placeholder="Nom de presupost" />
-              <input type="text"
-                value={persona}
-                onInput={event => setPresona(event.target.value)}
-                placeholder="Nom del client" />
+              <div className="div">
+                <input className="box" onClick={() => seleccion(1)} type="checkbox"
+                  checked={isWeb}
+                ></input>
+                <p className="box">Pagina Web (500€)</p>
+              </div>
+
+              {/* /* /////////-----------WEB-----------////////////*/}
+              {isWeb ? <MyWeb >
+                {loadData()}
+                {modalP && <Modalpaginas cerrarModal={setModalP} />}
+                {modalL && <Modalidioma cerrarModal={setModalL} />}
+                <p className="box webdiv">Numero de páginas</p>
+                <MyBtn onClick={() => restaP()} >-</MyBtn>
+                <MyInput className="box webdiv"
+                  onChange={(event) => definirPagina(event.target.value)}
+                  type="number"
+                  value={valorP}
+                  href={pagina}
+                />
+                <MyBtn onClick={() => sumarP()} >+</MyBtn>
+                <button onClick={() => { setModalP(true) }} className="btn-ico" >
+                  <i title="Info Paginas" class="far fa-question-circle"></i>
+                </button>
+                <br />
+                <p className="box webdiv">Numero de idiomas</p>
+                <MyBtn onClick={() => restaI()} >-</MyBtn>
+                <MyInput className="box webdiv"
+                  onChange={(event) => definirIdioma(event.target.value)}
+                  type="number"
+                  value={valorI}
+                  href={idioma} />
+                <MyBtn onClick={() => sumarI()}>+</MyBtn>
+                <button onClick={() => { setModalL(true) }} className="btn-ico">
+                  <i title="Info Idiomas" class="far fa-question-circle"></i>
+                </button>
+              </MyWeb> : null}
+              {/* /* /////////-----------FIN  WEB-----------////////////*/}
+              <br />
+              <div className="div">
+                <input className="box" onClick={() => seleccion(2)} type="checkbox"
+                  checked={isSeo}  ></input>
+                <p className="box">Consultoria SEO (300€)</p>
+              </div>
+              <br />
+              <div className="div">
+                <input className="box" onClick={() => seleccion(3)} type="checkbox"
+                  checked={isAds}  ></input>
+                <p className="box">Google Ads (200€)</p>
+              </div>
+              <br />
+              <p>Preu: {price}</p>
+              <hr />
+
+              {/* ///////////  INICIO CLIENTEES ///////////////////// */}
+
+              <button class="btn bg-warning" onClick={() => generarClientes()} >Guardar Presupuesto</button>
+              <div>
+                <input type="text"
+                  value={presupuesto}
+                  onInput={event => setPresupuesto(event.target.value)}
+                  placeholder="Nom de presupost" />
+                <input type="text"
+                  value={persona}
+                  onInput={event => setPresona(event.target.value)}
+                  placeholder="Nom del client" />
+              </div>
             </div>
-
-            <Cliente listaClientes={clientes} />
-
-            {/* ///////////  FIN CLIENTEES ///////////////////// */}
-
-
+            <div  >
+              <Cliente listaClientes={clientes} />
+            </div>
           </div>
+          {/* ///////////  FIN CLIENTEES ///////////////////// */}
+
+
+
         </Route >
+
         <Route path="/">
           <Inicio />
+
+
         </Route>
+
       </Switch>
-    </Router>
+    </Router >
   );
 }
 
