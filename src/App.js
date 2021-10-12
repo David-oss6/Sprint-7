@@ -11,6 +11,8 @@ import {
 import Inicio from './components/Inicio';
 import Modalpaginas from './components/Modalpagina';
 import Modalidioma from './components/Modalidioma';
+import { Usuario } from './components/Usuario'
+
 
 function App() {
   const [price, setPrice] = useState(0)
@@ -148,11 +150,10 @@ function App() {
   const [persona, setPresona] = useState("")
 
   const generarClientes = () => {
-    var day = Math.floor(Math.random() * 31)
-    var month = Math.floor(Math.random() * 12)
+    var day = Math.floor(Math.random() * 31) + 1
+    var month = Math.floor(Math.random() * 12) + 1
     var fecha = new Date(2021, day, month)
     fecha = fecha.toISOString()
-    console.log(fecha)
     const newCliente = {
       nomPresupost: presupuesto,
       nomClient: persona,
@@ -168,7 +169,6 @@ function App() {
   }
 
 
-
   return (
     <Router >
       <h1>Web Development </h1>
@@ -178,8 +178,19 @@ function App() {
         <hr />
       </div>
 
+      {/* ////////////////   USUARIO /////////////////////////// */}
+
+      <Usuario
+        isWeb={isWeb}
+        isSeo={isSeo}
+        isAds={isAds}
+        valorP={valorP}
+        valorI={valorI}
+      />
+
+
       <Switch>
-        <Route path="/compra" >
+        <Route path={`/compra/`} component={Usuario} >
           <div >
             <div className="div">
               <input className="box" onClick={() => seleccion(1)} type="checkbox"
