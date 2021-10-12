@@ -71,7 +71,7 @@ export default function Cliente(props) {
                 </MyClientUl>
             )}
             {alfa && props.listaClientes.map(cliente => cliente).sort(function (a, b) {
-                return a.data.toLowerCase().localeCompare(b.nomPresupost.toLowerCase());
+                return a.nomPresupost.toLowerCase().localeCompare(b.nomPresupost.toLowerCase());
             }).map(cliente =>
                 <MyClientUl >
                     <li className="myPrimerLi" > {cliente.nomPresupost}</li>
@@ -80,14 +80,19 @@ export default function Cliente(props) {
                     <li className="myLi" >Presupuesto: {cliente.preu}</li>
                 </MyClientUl>
             )}
-            {fecha && props.listaClientes.map(cliente => cliente).sort((a, b) => (b.data < a.data)).map(cliente =>
-                <MyClientUl >
-                    <li className="myPrimerLi" > {cliente.nomPresupost}</li>
-                    <li className="myLi" >Cliente: {cliente.nomClient}</li>
-                    <li className="myLi" >Fecha: {cliente.data}</li>
-                    <li className="myLi" >Presupuesto: {cliente.preu}</li>
-                </MyClientUl>
-            )}
+            {fecha && props.listaClientes.map(cliente => cliente).sort((a, b) => {
+                parseInt(a.data)
+                parseInt(b.data)
+                return a.data.toLowerCase().localeCompare(b.data.toLowerCase());
+            })
+                .map(cliente =>
+                    <MyClientUl >
+                        <li className="myPrimerLi" > {cliente.nomPresupost}</li>
+                        <li className="myLi" >Cliente: {cliente.nomClient}</li>
+                        <li className="myLi" >Fecha: {cliente.data}</li>
+                        <li className="myLi" >Presupuesto: {cliente.preu}</li>
+                    </MyClientUl>
+                )}
             {buscar && props.listaClientes.map(cliente => cliente).filter(filtrar).map(cliente =>
                 <MyClientUl >
                     <li className="myPrimerLi" > {cliente.nomPresupost}</li>
