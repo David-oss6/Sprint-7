@@ -6,7 +6,7 @@ export default function Modalidioma(props) {
             <div onClick={() => { props.cerrarModal(false) }} className="modalBackground">
                 <div className="modalContainer">
                     <div className="modal-main">
-                        Info sobre Idiomas: Lorem ipsum dolor sit amet consectetur adipisicing elit numquam! 30€
+                        Su sitio web tiene {props.numIdio} idiomas seleccionados
                     </div>
                 </div>
             </div>

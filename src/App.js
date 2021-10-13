@@ -37,6 +37,14 @@ function App() {
   const [modalP, setModalP] = useState(false)
   const [modalL, setModalL] = useState(false)
 
+  ////////    LISTA CLIENTES ////////////////////////
+  const cl = localStorage.getItem("clientes")
+  console.log(cl)
+  const [clientes, setClientes] = useState([]);
+  const [presupuesto, setPresupuesto] = useState("")
+  const [persona, setPresona] = useState("")
+  ////////    LISTA CLIENTES ////////////////////////
+
 
   const seleccion = (num) => {
     if (num === 1) {
@@ -98,6 +106,10 @@ function App() {
     ///////////////////Local Storage ///////////////////////////
     JSON.stringify(isWeb)
     localStorage.setItem("isWeb", isWeb)
+    JSON.stringify(isSeo)
+    localStorage.setItem("isSeo", isSeo)
+    JSON.stringify(isAds)
+    localStorage.setItem("isAds", isAds)
     JSON.stringify(valorP)
     localStorage.setItem("valorP", valorP)
     JSON.stringify(valorI)
@@ -110,7 +122,9 @@ function App() {
     localStorage.setItem("ads", ads)
     JSON.stringify(webExtras)
     localStorage.setItem("webExtras", webExtras)
-  }, [valorP, valorI, web, seo, ads, webExtras, isWeb, isAds, isSeo])
+    JSON.stringify(clientes)
+    localStorage.setItem("clientes", clientes)
+  }, [valorP, valorI, web, seo, ads, webExtras, isWeb, isAds, isSeo, clientes])
   //////////////////Local Storage ///////////////////////////
 
   // {*BOTONES INCREMENTAR/RESTAR*}   /////////////////////
@@ -133,10 +147,7 @@ function App() {
     JSON.stringify(price)
     localStorage.setItem("valor", "price")
   }, [price])
-  ////////    LISTA CLIENTES ////////////////////////
-  const [clientes, setClientes] = useState([]);
-  const [presupuesto, setPresupuesto] = useState("")
-  const [persona, setPresona] = useState("")
+
 
   const generarClientes = () => {
     var day = Math.floor(Math.random() * 31) + 1

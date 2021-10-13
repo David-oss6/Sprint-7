@@ -8,7 +8,7 @@ export default function Modalpaginas(props) {
             <div className="modalContainer">
 
                 <div className="modal-main">
-                    Info sobre Paginas: Lorem ipsum dolor sit amet consectetur adipisicing elit numquam! 30€
+                    Su sitio web tiene {props.numPag} páginas seleccionadas
                 </div>
 
             </div>

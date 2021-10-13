@@ -39,7 +39,6 @@ export default function Cliente(props) {
     //// FIN Filtrar ////////
     /// LOCALSTORAGE //////
     useEffect(() => {
-
         JSON.stringify(props.listaClientes)
         localStorage.setItem("clientes", props.listaClientes)
     }, [props.listaClientes])
