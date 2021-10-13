@@ -15,14 +15,25 @@ import { Usuario } from './components/Usuario'
 
 
 function App() {
-  const [price, setPrice] = useState(0)
-  const [web, setWeb] = useState(0)
-  const [seo, setSeo] = useState(0)
-  const [ads, setAds] = useState(0)
-  const [isWeb, setIsWeb] = useState(false);
-  const [isSeo, setIsSeo] = useState(false);
-  const [isAds, setIsAds] = useState(false)
-  const [webExtras, setWebExtras] = useState(0)
+  const w = localStorage.getItem("web")
+  const p = localStorage.getItem("price")
+  const s = localStorage.getItem("seo")
+  const a = localStorage.getItem("ads")
+  const isw = localStorage.getItem("isWeb")
+  const iss = localStorage.getItem("isSeo")
+  const isa = localStorage.getItem("isAds")
+  const iswe = localStorage.getItem("webExtras")
+  const vp = localStorage.getItem("valorP")
+  const vi = localStorage.getItem("valorI")
+
+  const [price, setPrice] = useState(p ? JSON.parse(p) : 0)
+  const [web, setWeb] = useState(w ? JSON.parse(w) : 0)
+  const [seo, setSeo] = useState(s ? JSON.parse(s) : 0)
+  const [ads, setAds] = useState(a ? JSON.parse(a) : 0)
+  const [isWeb, setIsWeb] = useState(isw ? JSON.parse(isw) : false);
+  const [isSeo, setIsSeo] = useState(iss ? JSON.parse(iss) : false);
+  const [isAds, setIsAds] = useState(isa ? JSON.parse(isa) : false)
+  const [webExtras, setWebExtras] = useState(iswe ? JSON.parse(iswe) : 0)
   const [modalP, setModalP] = useState(false)
   const [modalL, setModalL] = useState(false)
 
@@ -70,8 +81,8 @@ function App() {
   ///////  PAGINAS E IDIOMAS   ///////////////////////////
   const pagina = useRef(0)
   const idioma = useRef(0)
-  const [valorP, setValorP] = useState(0)
-  const [valorI, setValorI] = useState(0)
+  const [valorP, setValorP] = useState(vp ? JSON.parse(vp) : 0)
+  const [valorI, setValorI] = useState(vi ? JSON.parse(vi) : 0)
 
   const definirPagina = (event) => {
     setValorP(event)
@@ -80,7 +91,7 @@ function App() {
   const definirIdioma = (event) => {
     setValorI(event)
   }
-
+  //////////////////Local Storage ///////////////////////////
   useEffect(() => {
     setWebExtras(((valorP * valorI) * 30))
     setPrice(web + seo + ads + webExtras)
@@ -99,8 +110,8 @@ function App() {
     localStorage.setItem("ads", ads)
     JSON.stringify(webExtras)
     localStorage.setItem("webExtras", webExtras)
-    //////////////////Local Storage ///////////////////////////
   }, [valorP, valorI, web, seo, ads, webExtras, isWeb, isAds, isSeo])
+  //////////////////Local Storage ///////////////////////////
 
   // {*BOTONES INCREMENTAR/RESTAR*}   /////////////////////
 
@@ -117,27 +128,7 @@ function App() {
     valorI > 0 && setValorI(valorI - 1)
   }
 
-  //////// LOAD LOCAL STORAGE  ////////////////////
-  function loadData() {
-    localStorage.getItem(isWeb)
-    JSON.parse(isWeb)
-    localStorage.getItem(isAds)
-    JSON.parse(isAds)
-    localStorage.getItem(isSeo)
-    JSON.parse(isSeo)
-    localStorage.getItem(valorP)
-    JSON.parse(valorP)
-    localStorage.getItem(valorI)
-    JSON.parse(valorI)
-    localStorage.getItem(web)
-    JSON.parse(web)
-    localStorage.getItem(seo)
-    JSON.parse(seo)
-    localStorage.getItem(ads)
-    JSON.parse(ads)
-    localStorage.getItem(webExtras)
-    JSON.parse(webExtras)
-  }
+
   useEffect(() => {
     JSON.stringify(price)
     localStorage.setItem("valor", "price")
@@ -169,10 +160,11 @@ function App() {
 
   return (
     <Router >
+
       <h1>Web Development </h1>
       <div>
         <Link to="/" className="btn">Inicio</Link>
-        <Link onClick={() => loadData()} to="/compra" className="btn">Compra</Link>
+        <Link to="/compra" className="btn">Compra</Link>
         <hr />
       </div>
 
@@ -202,9 +194,9 @@ function App() {
 
               {/* /* /////////-----------WEB-----------////////////*/}
               {isWeb ? <MyWeb >
-                {loadData()}
-                {modalP && <Modalpaginas cerrarModal={setModalP} />}
-                {modalL && <Modalidioma cerrarModal={setModalL} />}
+
+                {modalP && <Modalpaginas numPag={valorP} cerrarModal={setModalP} />}
+                {modalL && <Modalidioma numIdio={valorI} cerrarModal={setModalL} />}
                 <p className="box webdiv">Numero de páginas</p>
                 <MyBtn onClick={() => restaP()} >-</MyBtn>
                 <MyInput className="box webdiv"
