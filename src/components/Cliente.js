@@ -1,12 +1,14 @@
 import { useState, useEffect } from 'react'
 import { MyBtn, MyClientUl } from './styled'
 
-export default function Cliente(props) {
+export default function Cliente({ clientes }) {
     const [normal, setNormal] = useState(true)
     const [alfa, setAlfa] = useState(false)
     const [fecha, setFecha] = useState(false)
     const [buscar, setBuscar] = useState(false)
     const [content, setContent] = useState("")
+
+
     function orden(a) {
         if (a === 1) {
             setNormal(false)
@@ -38,16 +40,11 @@ export default function Cliente(props) {
     }
     //// FIN Filtrar ////////
     /// LOCALSTORAGE //////
-    useEffect(() => {
-        JSON.stringify(props.listaClientes)
-        localStorage.setItem("clientes", props.listaClientes)
-    }, [props.listaClientes])
+
 
     return (
         <div>
-
             {/* /////////// Botones  /////////// */}
-
             <MyBtn onClick={() => orden(1)} >Orden Alfabético</MyBtn>
             <MyBtn onClick={() => orden(2)} >Orden por Fecha</MyBtn>
             <MyBtn onClick={() => orden(3)} >Reiniciar</MyBtn>
@@ -55,11 +52,9 @@ export default function Cliente(props) {
                 placeholder="Buscar Presupost"
                 onInput={event => setContent(event.target.value)}
             />
-            <button onClick={() => search()}><i class="fas fa-search"></i></button>
-
+            <button onClick={() => search()}><i className="fas fa-search"></i></button>
             {/* ///////////// Fin Botones /////////// */}
-
-            {normal && props.listaClientes.map((cliente, index) =>
+            {normal && clientes.map((cliente, index) =>
                 <MyClientUl  >
 
                     <li className="myPrimerLi" key={index} > {cliente.nomPresupost}</li>
@@ -69,7 +64,7 @@ export default function Cliente(props) {
 
                 </MyClientUl>
             )}
-            {alfa && props.listaClientes.map(cliente => cliente).sort(function (a, b) {
+            {alfa && clientes.map(cliente => cliente).sort(function (a, b) {
                 return a.nomPresupost.toLowerCase().localeCompare(b.nomPresupost.toLowerCase());
             }).map(cliente =>
                 <MyClientUl >
@@ -79,7 +74,7 @@ export default function Cliente(props) {
                     <li className="myLi" >Presupuesto: {cliente.preu}</li>
                 </MyClientUl>
             )}
-            {fecha && props.listaClientes.map(cliente => cliente).sort((a, b) => {
+            {fecha && clientes.map(cliente => cliente).sort((a, b) => {
                 parseInt(a.data)
                 parseInt(b.data)
                 return a.data.toLowerCase().localeCompare(b.data.toLowerCase());
@@ -92,7 +87,7 @@ export default function Cliente(props) {
                         <li className="myLi" >Presupuesto: {cliente.preu}</li>
                     </MyClientUl>
                 )}
-            {buscar && props.listaClientes.map(cliente => cliente).filter(filtrar).map(cliente =>
+            {buscar && clientes.map(cliente => cliente).filter(filtrar).map(cliente =>
                 <MyClientUl >
                     <li className="myPrimerLi" > {cliente.nomPresupost}</li>
                     <li className="myLi" >Nombre del Cliente: {cliente.nomClient}</li>
@@ -100,9 +95,7 @@ export default function Cliente(props) {
                     <li className="myLi" >Presupuesto: {cliente.preu}</li>
                 </MyClientUl>
             )}
-
         </div>
-
     )
 }
 

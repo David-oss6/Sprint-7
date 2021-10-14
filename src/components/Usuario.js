@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react'
 import { useHistory } from 'react-router'
+
 export const Usuario = (props) => {
     let isWeb = props.isWeb
     let isSeo = props.isSeo

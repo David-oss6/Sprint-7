@@ -26,6 +26,7 @@ function App() {
   const vp = localStorage.getItem("valorP")
   const vi = localStorage.getItem("valorI")
 
+
   const [price, setPrice] = useState(p ? JSON.parse(p) : 0)
   const [web, setWeb] = useState(w ? JSON.parse(w) : 0)
   const [seo, setSeo] = useState(s ? JSON.parse(s) : 0)
@@ -38,13 +39,17 @@ function App() {
   const [modalL, setModalL] = useState(false)
 
   ////////    LISTA CLIENTES ////////////////////////
-  const cl = localStorage.getItem("clientes")
-  console.log(cl)
+
+
   const [clientes, setClientes] = useState([]);
   const [presupuesto, setPresupuesto] = useState("")
   const [persona, setPresona] = useState("")
   ////////    LISTA CLIENTES ////////////////////////
+  useEffect(() => {
 
+    JSON.stringify(clientes)
+    localStorage.setItem("clientes", clientes)
+  }, [clientes])
 
   const seleccion = (num) => {
     if (num === 1) {
@@ -166,6 +171,12 @@ function App() {
     setIsAds(false)
     setIsSeo(false)
     setIsWeb(false)
+    setAds(0)
+    setSeo(0)
+    setWeb(0)
+    setWebExtras(0)
+    setValorI(0)
+    setValorP(0)
   }
 
 
@@ -218,7 +229,7 @@ function App() {
                 />
                 <MyBtn onClick={() => sumarP()} >+</MyBtn>
                 <button onClick={() => { setModalP(true) }} className="btn-ico" >
-                  <i title="Info Paginas" class="far fa-question-circle"></i>
+                  <i title="Info Paginas" className="far fa-question-circle"></i>
                 </button>
                 <br />
                 <p className="box webdiv">Numero de idiomas</p>
@@ -230,7 +241,7 @@ function App() {
                   href={idioma} />
                 <MyBtn onClick={() => sumarI()}>+</MyBtn>
                 <button onClick={() => { setModalL(true) }} className="btn-ico">
-                  <i title="Info Idiomas" class="far fa-question-circle"></i>
+                  <i title="Info Idiomas" className="far fa-question-circle"></i>
                 </button>
               </MyWeb> : null}
               {/* /* /////////-----------FIN  WEB-----------////////////*/}
@@ -252,7 +263,7 @@ function App() {
 
               {/* ///////////  INICIO CLIENTEES ///////////////////// */}
 
-              <button class="btn bg-warning" onClick={() => generarClientes()} >Guardar Presupuesto</button>
+              <button className="btn bg-warning" onClick={() => generarClientes()} >Guardar Presupuesto</button>
               <div>
                 <input type="text"
                   value={presupuesto}
@@ -265,7 +276,7 @@ function App() {
               </div>
             </div>
             <div  >
-              <Cliente listaClientes={clientes} />
+              <Cliente clientes={clientes} />
             </div>
           </div>
           {/* ///////////  FIN CLIENTEES ///////////////////// */}
